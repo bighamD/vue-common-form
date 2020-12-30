@@ -1,22 +1,18 @@
-<template>
-  <div>
-    <el-button type="danger" @click='invoke'>invoke dialog</el-button>
-  </div>
-</template>
-
 <script>
 import Form2 from './form2';
 import { ELEMENTS } from '@/utils/assemble';
-console.log(ELEMENTS)
+
 export default {
   name: 'HelloWorld',
   props: {
     msg: String,
   },
+  // eslint-disable-next-line
+  render(h) {
+    return <el-button type="danger" onClick={this.invoke}>invoke dialog</el-button>
+  },
   data() {
     return {
-      btnText: '点击提交表单',
-      message: 'renderContent',
       TABLE_ITEM_LABEL_LIST: [
         {
           key: 'instruction',
@@ -173,16 +169,6 @@ export default {
       },
     };
   },
-  components: {},
-  created() {
-    console.log(this);
-  },
-  updated() {
-    console.log('parent');
-  },
-  mounted() {
-    console.log('parent');
-  },
   methods: {
     change(item) {
       console.log(item);
@@ -227,7 +213,6 @@ export default {
           });
           // 主动关闭对话框使用hide回调
           // 或者this.$dialog.hide()
-          // this.$dialog.hide();
           setTimeout(hide, 800);
         },
       });

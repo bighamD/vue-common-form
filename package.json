@@ -26,7 +26,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged",
-      "commit-msg": "node scripts/verifyCommit.js"
+      "commit-msg": "node scripts/verifyCommitMsg.js"
     }
   },
   "lint-staged": {

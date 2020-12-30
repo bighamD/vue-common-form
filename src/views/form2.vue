@@ -1,6 +1,6 @@
 <template>
   <CommonForm :form-data="formData" :form-items="formItems" :inline="true">
-    <template v-slot:age="row">
+    <template v-slot:age="">
       <el-input v-model="formData.age"></el-input>
     </template>
     <template v-slot:footer="">

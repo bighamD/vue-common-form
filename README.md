@@ -7,7 +7,7 @@
 - 如果el属性已经不满足需求，可以使用render函数传入自定义的form-item内容
 - 如果在template中使用Common-Form可以使用具名插槽v-slot:name指定内容
 - 提供input、change事件，传递的参数是当前item，通知外部正在修改的item，这个的好处就是可以减少使用watch，不必去监听formData
-- 条件显示showCondition, 可以根据条件是否显示当前item，TODO:可以修改为异步逻辑，async
+- 条件显示showCondition, 可以根据条件是否显示当前item，TODO: 可以修改为异步逻辑，async
 - 额外的属性通过props属性传递，会被直接渲染为DOM property，这个属性十分关键
 
 # Vue Promise dialog

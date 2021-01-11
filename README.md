@@ -2,7 +2,7 @@
 **功能**
 - 通过form-item数组配置需要表单的元素
 - 如果结构单一可以直接通过指定el属性，比如el-input
-- 可以通过insertText把额外的内容插入到这个el的子元素中
+- 可以通过insertText把额外的内容插入到这个el的子元素尾部
 - 可以通过appendText将额外的内容作为兄弟元素插入
 - 如果el属性已经不满足需求，可以使用render函数传入自定义的form-item内容
 - 如果在template中使用Common-Form可以使用具名插槽v-slot:name指定内容

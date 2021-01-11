@@ -13,7 +13,7 @@
 # Vue Promise dialog
 **功能**
 - 不用管理visible变量，而且可以把每个dialog拆成独立的组件，直接通过invoke方法呼出一个对话框，当需要关闭的是可以使用hide回调或者this.$dialog.hide(name)关闭整个例子
-- invoke返回一个promise，可以主动resolve这个promise，有两种方式
+- invoke返回一个promise，可以主动resolve这个promise，有以下两种方式
     1. 使用confirm回调中的第二个参数resolve
     2. 使用this.$dialog.next(name, payload)
 - 通过name维护各自的dialog实例，invoke相同name的dialog实际上只是在替换里面的内容，关闭的时候也要指定关闭对话框的name

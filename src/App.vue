@@ -1,16 +1,16 @@
 <template>
   <div id="app">
-    <hello-world></hello-world>
+    <custom-form></custom-form>
   </div>
 </template>
 
 <script>
-import HelloWorld from '@/views/form.vue'
+import CustomForm from '@/views/form.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    CustomForm
   }
 }
 </script>

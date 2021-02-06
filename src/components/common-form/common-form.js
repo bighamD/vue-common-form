@@ -7,19 +7,10 @@ export default {
             type: Object,
             required: true,
         },
-        formItems: {
-            type: Array,
+        formConfig: {
+            type: Object,
             required: true
         },
-        labelWidth: {
-            type: String,
-        },
-        inline: {
-            type: Boolean
-        },
-        rules: {
-            type: Object,
-        }
     },
     data() {
         return {
@@ -30,12 +21,16 @@ export default {
     render(h) {
         return (
             <el-form
-                rules={this.rules}
-                inline={this.inline}
-                props={{ model: this.formData }}
-                labelWidth={this.labelWidth}
+                ref="_form"
+                rules={this.genRules()}
+                // inline={this.inline}
+                props={{ 
+                    model: this.formData,
+                    ...this.formConfig.props
+                }}
+                // labelWidth={this.labelWidth}
             >
-                {this.formItems.map((item, idx) => {
+                {this.formConfig.formItems.map((item, idx) => {
                     if (typeof item.showCondition !== 'function') {
                         item.showCondition = () => true;
                     }
@@ -57,6 +52,12 @@ export default {
         );
     },
     methods: {
+        genRules() {
+            return this.formConfig.formItems.reduce((rules, {key, validators}) => {
+                validators && (rules[key] = validators);
+                return rules;
+            }, {});
+        },
         formCell(cellData, index) {
             const {
                 el: Unit,
@@ -130,5 +131,14 @@ export default {
                 index,
             });
         },
+        validate() {
+            return this.$refs._form.validate(); // 返回一个promise
+        },
+        clearValidate() {
+            return this.$refs._form.clearValidate();
+        },
+        getFormInstance() {
+            return this.formInstance || (this.formInstance = this.$refs._form);
+        }
     },
 };

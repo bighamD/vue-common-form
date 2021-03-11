@@ -238,17 +238,9 @@ export default {
       });
       this.$dialog.invoke({
         title: data,
+        editable: false, // 不显示dialog内置的确认取消footer
         render: () => <Form2></Form2>,
         confirmButtonText: "提交",
-        confirm: async (hide) => {
-          await this.$message({
-            message: "提交成功!!",
-            type: "success",
-          });
-          // 主动关闭对话框使用hide回调
-          // 或者this.$dialog.hide()
-          setTimeout(hide, 800);
-        },
       });
     },
   },

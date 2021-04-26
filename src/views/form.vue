@@ -189,14 +189,42 @@ export default {
       console.log(item);
     },
     async invoke() {
+      window.J.postMessage({
+        type: 'message',
+        data: {
+          formdata: this.formData,
+          callback: '6767',
+          callback: (res => {
+            console.log('res', res)
+          }).toString()
+        }
+      })
+      
+      var info = window.J.getMchInfo();
+      console.log(info)
+
+    var info2 = window.J.getAppId();
+      console.log('appid', info2)
+      // window.J.postMessage({
+      //   type: 'navigateBack',
+      //   data: {
+      //     name: 1234,
+      //   }
+      // })
+      setTimeout(() => {
+
+        window.J.navigateBack();
+      }, 1000)
+
+      // return;
       const data = await this.$dialog.invoke({
         width: "50%",
         title: "新增配置",
         cancel: () => {
-          console.log("cancel event has triggered");
+          // console.log("cancel event has triggered");
         },
         open: () => {
-          console.log("open event has triggered");
+          // console.log("open event has triggered");
         },
         // footer() {
         //   return <el-button onClick={this.confirm}>提交</el-button>

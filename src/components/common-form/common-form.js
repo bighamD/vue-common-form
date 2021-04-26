@@ -23,12 +23,10 @@ export default {
             <el-form
                 ref="_form"
                 rules={this.genRules()}
-                // inline={this.inline}
                 props={{ 
                     model: this.formData,
                     ...this.formConfig.props
                 }}
-                // labelWidth={this.labelWidth}
             >
                 {this.formConfig.formItems.map((item, idx) => {
                     if (typeof item.showCondition !== 'function') {
@@ -58,6 +56,21 @@ export default {
                 return rules;
             }, {});
         },
+        /**
+         * 
+         * @param {*} events @keyup.native这种带修饰符事件在vue-jsx需要使用nativeOn, 其余on
+         */
+        sortEvents(events) {
+            const eventContainer = {
+                nativeOn: {},
+                on: {}
+            }
+            Object.keys(events).forEach(key => {
+                const type = /^key(?=up|press|down)/.test(key) ? 'nativeOn' : 'on';
+                eventContainer[type][key] = events[key];
+            });
+            return eventContainer;
+        },
         formCell(cellData, index) {
             const {
                 el: Unit,
@@ -70,6 +83,7 @@ export default {
                 placeholder,
                 disabled = false,
                 insertText = noop,
+                events = {}
             } = cellData;
 
             if (/^el-/.test(Unit)) {
@@ -79,16 +93,17 @@ export default {
                     value={this.formData[key]}
                     onInput={(e) => this.inputChangeHandle(e, key, index)}
                     onChange={(e) => this.changeHandle(e, key, index)}
-                    {... { attrs: props }}
+                    {... { attrs: props, ...this.sortEvents(events) }}
                 >
                     {
                         options?.map(opt => {
+           
                             const Opt = opt.el;
                             return (<Opt
                                 value={opt.value}
                                 label={opt.label}
                             >
-                                {opt.value}
+                                {Opt === 'el-radio' ? opt.value : ''}
                             </Opt>);
                         })
                     }

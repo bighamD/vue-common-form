@@ -5,7 +5,7 @@
     </template>
     <template v-slot:footer="">
       <el-row>
-        <el-button>查询</el-button>
+        <el-button @click="cancel">取消</el-button>
         <el-button type="danger">新增</el-button>
       </el-row>
     </template>
@@ -26,6 +26,10 @@ export default {
             placeholder: "输入姓名",
             key: "name",
             label: "姓名",
+            events: {
+              change: e => this.nameChange(e),
+              input: e => this.nameInput(e)
+            }
           },
           {
             el: "slot",
@@ -39,6 +43,17 @@ export default {
         age: 26,
       },
     };
+  },
+  methods: {
+    nameChange() {
+      console.log('do something when name changed')
+    },
+    nameInput() {
+      console.log('do something when name input')
+    },
+    cancel() {
+      this.$dialog.hide(); //关闭这个对话框
+    }
   },
 };
 </script>

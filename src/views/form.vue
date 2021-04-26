@@ -41,20 +41,40 @@ export default {
             label: "番号",
             el: ELEMENTS.Select,
             options: [
-              { value: "高中生的第一次", label: "SN8974", el: "el-option" },
-              { value: "人妻的诱惑", label: "SN2254", el: "el-option" },
+              {
+                value: "选项1",
+                label: "黄金糕",
+                el: ELEMENTS.Option
+              },
+              {
+                value: "选项2",
+                label: "双皮奶",
+                el: ELEMENTS.Option
+                
+              },
+              {
+                value: "选项3",
+                label: "蚵仔煎",
+                el: ELEMENTS.Option
+
+              },
             ],
+            events: {
+              change: e => {
+                console.log('option changed', e);
+              }
+            }
           },
           {
             key: "checked",
             label: "是否可选",
             el: ELEMENTS.RadioGroup,
             formatter: (key) => {
-              return { yes: "是", no: "否" }[key];
+              return { 1: "是", 0: "否" }[key];
             },
             options: [
-              { label: "no", el: ELEMENTS.Radio },
-              { label: "yes", el: ELEMENTS.Radio },
+              { label: "0", value: '否', el: ELEMENTS.Radio },
+              { label: "1",value: '是', el: ELEMENTS.Radio },
             ],
             appendText: (text, formatter) => {
               return (
@@ -174,7 +194,7 @@ export default {
         render: "666",
         switch: "false",
         instruction: "",
-        pid: "DN67999",
+        pid: "选项1",
         avName: "人妻诱惑",
         avNo: "SN7889",
         alias: "bigham",
@@ -246,17 +266,9 @@ export default {
       });
       this.$dialog.invoke({
         title: data,
+        editable: false, // 不显示dialog内置的确认取消footer
         render: () => <Form2></Form2>,
         confirmButtonText: "提交",
-        confirm: async (hide) => {
-          await this.$message({
-            message: "提交成功!!",
-            type: "success",
-          });
-          // 主动关闭对话框使用hide回调
-          // 或者this.$dialog.hide()
-          setTimeout(hide, 800);
-        },
       });
     },
   },

@@ -209,32 +209,6 @@ export default {
       console.log(item);
     },
     async invoke() {
-      window.J.postMessage({
-        type: 'message',
-        data: {
-          formdata: this.formData,
-          callback: '6767',
-          callback: (res => {
-            console.log('res', res)
-          }).toString()
-        }
-      })
-      
-      var info = window.J.getMchInfo();
-      console.log(info)
-
-    var info2 = window.J.getAppId();
-      console.log('appid', info2)
-      // window.J.postMessage({
-      //   type: 'navigateBack',
-      //   data: {
-      //     name: 1234,
-      //   }
-      // })
-      setTimeout(() => {
-
-        window.J.navigateBack();
-      }, 1000)
 
       // return;
       const data = await this.$dialog.invoke({

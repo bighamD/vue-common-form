@@ -13,7 +13,7 @@
 </template>
 <script>
 export default {
-  data() {
+  data () {
     return {
       formConfig: {
         props: {
@@ -22,38 +22,38 @@ export default {
         },
         formItems: [
           {
-            el: "el-input",
-            placeholder: "输入姓名",
-            key: "name",
-            label: "姓名",
+            el: 'el-input',
+            placeholder: '输入姓名',
+            key: 'name',
+            label: '姓名',
             events: {
               change: e => this.nameChange(e),
               input: e => this.nameInput(e)
             }
           },
           {
-            el: "slot",
-            key: "age",
-            label: "年龄",
-          },
-        ],
+            el: 'slot',
+            key: 'age',
+            label: '年龄'
+          }
+        ]
       },
       formData: {
-        name: "bigham",
-        age: 26,
-      },
-    };
-  },
-  methods: {
-    nameChange() {
-      console.log('do something when name changed')
-    },
-    nameInput() {
-      console.log('do something when name input')
-    },
-    cancel() {
-      this.$dialog.hide(); //关闭这个对话框
+        name: 'bigham',
+        age: 26
+      }
     }
   },
-};
+  methods: {
+    nameChange () {
+      console.log('do something when name changed')
+    },
+    nameInput () {
+      console.log('do something when name input')
+    },
+    cancel () {
+      this.$dialog.hide() //关闭这个对话框
+    }
+  }
+}
 </script>

@@ -55,7 +55,7 @@ export default {
       cancelButtonText
     })
   },
-  hide (name) {
+  close (name) {
     getDialogInstance(name).hide()
   },
   next (name, payload) {

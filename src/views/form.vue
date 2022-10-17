@@ -1,19 +1,16 @@
+<template>
+  <el-button type="danger" @click="invoke">
+    invoke dialog
+  </el-button>
+</template>
 <script>
 import Form2 from './form2'
 import { ELEMENTS } from '@/utils/assemble'
 
 export default {
-  name: 'HelloWorld',
+  name: 'Form1',
   props: {
     msg: String
-  },
-  // eslint-disable-next-line
-  render (h) {
-    return (
-      <el-button type='danger' onClick={this.invoke}>
-        invoke dialog
-      </el-button>
-    )
   },
   data () {
     return {
@@ -24,19 +21,20 @@ export default {
         },
         formItems: [
           {
+            span: 18,
             key: 'instruction',
             label: '介绍',
             el: ELEMENTS.Input,
-            showCondition: () => this.formData.checked === 'yes', //条件显示
+            // showCondition: () => this.formData.checked === '1', //条件显示
             validators: [
               { required: true, message: '请输入自我介绍', trigger: ['blur'] }
             ],
             props: {
-              name: 2345,
               type: 'textarea'
             }
           },
           {
+            // span: 12,
             key: 'pid',
             label: '番号',
             el: ELEMENTS.Select,
@@ -93,8 +91,8 @@ export default {
           },
           { key: 'avName', label: '片名', el: ELEMENTS.Input },
           {
-            key: 'avNo',
-            label: '番号',
+            key: 'phone',
+            label: '手机号码',
             el: ELEMENTS.Input,
             disabled: true
           },
@@ -144,10 +142,12 @@ export default {
             }
           },
           {
+
             key: 'date',
             label: '时间',
             el: ELEMENTS.TimeSelect,
             placeholder: '选择时间',
+            span:14,
             props: {
               'picker-options': {
                 start: '08:30',
@@ -180,7 +180,13 @@ export default {
           {
             key: 'render',
             label: 'render函数',
+
             render: () => <el-progress percentage={80}></el-progress>
+          },
+          {
+            label: '自定义组件: ',
+            key: '',
+            render: () => <HelloWorld msg='hello wms' />
           }
         ]
       },
@@ -190,9 +196,9 @@ export default {
         date: '',
         render: '666',
         switch: 'false',
-        instruction: '',
+        instruction: '1231234',
         pid: '选项1',
-        avName: '人妻诱惑',
+        avName: 'A567',
         avNo: 'SN7889',
         alias: 'bigham',
         checked: 'no',
@@ -205,43 +211,54 @@ export default {
     change (item) {
       console.log(item)
     },
+
+    restore () {
+      console.log('format', this.formData)
+      this.$refs.form1.resetFields()
+    },
     async invoke () {
-      // return;
       const data = await this.$dialog.invoke({
         dialogProps: {
-          top: '20vh'
+          top: '20vh',
+          'close-on-click-modal': false
         },
         width: '50%',
-        title: '新增配置',
-        cancel: () => {
-          // console.log("cancel event has triggered");
-        },
-        open: () => {
-          // console.log("open event has triggered");
-        },
+        title: () => <span style={{color:'red'}}><HelloWorld/></span>,
+        cancel: () => {},
+        open: () => {},
+        cancelButtonText: '',
+        confirmButtonText: '下一步',
         // footer() {
         //   return <el-button onClick={this.confirm}>提交</el-button>
         // },
         confirm: next => {
-          setTimeout(() => {
-            next('显示下一个表单')
-          }, 800)
+          next('显示下一个表单')
         },
         render: () => {
           return (
-            <CommonForm
-              form-data={this.formData}
-              form-config={this.FORM_CONFIG}
-              onChange={this.change}
-            ></CommonForm>
+            <div>
+              <el-button onClick={this.restore}>Restore</el-button>
+              <CommonForm
+                ref='form1'
+                form-data={this.formData}
+                form-config={this.FORM_CONFIG}
+                onChange={this.change}
+              ></CommonForm>
+            </div>
           )
         }
       })
+      console.log('data', data)
       this.$dialog.invoke({
+        // dialogProps: {
+        //   modal: false,
+        // },
+        // name: 'form2',
         title: data,
         editable: false, // 不显示dialog内置的确认取消footer
         render: () => <Form2></Form2>,
-        confirmButtonText: '提交'
+        confirmButtonText: '提交',
+        footer: () => null
       })
     }
   }

@@ -39,7 +39,6 @@ export default {
         ]
       },
       formData: {
-        name: 'bigham',
         age: 26
       }
     }
@@ -52,7 +51,7 @@ export default {
       console.log('do something when name input')
     },
     cancel () {
-      this.$dialog.hide() //关闭这个对话框
+      this.$dialog.close() //关闭这个对话框
     }
   }
 }

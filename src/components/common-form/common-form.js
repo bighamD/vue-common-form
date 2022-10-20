@@ -21,6 +21,7 @@ export default {
   // eslint-disable-next-line
   render (h) {
     const { props = {} } = this.formConfig
+    console.log('rerender', this)
     return (
       <el-form
         ref='_form'
@@ -30,6 +31,7 @@ export default {
           model: this.formData,
           ...props
         }}
+        {...{ attrs: this.$attr }}
       >
         {
           <el-row gutter={props.gutter || 20}>
@@ -52,8 +54,8 @@ export default {
       const span = item.span || props.span || 24
       const offset = item.offset || props.offset || 0
 
-      if (!isFun(item.showCondition)) {
-        item.showCondition = () => true
+      if (!isFun(item.show)) {
+        item.show = () => true
       }
       if (!isFun(item.appendLabel)) {
         item.appendLabel = noop
@@ -63,9 +65,7 @@ export default {
         <el-col span={span} offset={offset}>
           {item.appendLabel()}
           <el-form-item
-            style={
-              item.showCondition(this.formData, item) ? {} : { display: 'none' }
-            }
+            style={item.show(this.formData, item) ? {} : { display: 'none' }}
             labelWidth={item.labelWidth}
             key={idx}
             required={item.required}

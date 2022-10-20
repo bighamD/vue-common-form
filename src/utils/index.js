@@ -4,6 +4,6 @@ export const noop = () => {}
 export const compose = (...fns) =>
   fns.reduce((f, g) => (...args) => f(g(...args)))
 
-export const wrapAsFunction = val => () => val
+export const wrapAsFunction = val => typeof val === 'function' ? val : () => val
 
 export const isFun = fnLike => typeof fnLike === 'function'

@@ -14,7 +14,11 @@ export default {
   },
   data () {
     return {
+      options: [],
       FORM_CONFIG: {
+        dym: {
+          options: []
+        },
         props: {
           labelWidth: '120px'
           // inline: true,
@@ -25,7 +29,7 @@ export default {
             key: 'instruction',
             label: '介绍',
             el: ELEMENTS.Input,
-            // showCondition: () => this.formData.checked === '1', //条件显示
+            show: () => this.formData.pid === '选项1', //条件显示
             validators: [
               { required: true, message: '请输入自我介绍', trigger: ['blur'] }
             ],
@@ -72,22 +76,24 @@ export default {
               { label: '0', value: '否', el: ELEMENTS.Radio },
               { label: '1', value: '是', el: ELEMENTS.Radio }
             ],
-            appendText: (text, formatter) => {
-              return (
-                <span style='color:#F56C6C;margin-left:20px'>
-                  {formatter(text)}
-                </span>
-              )
+            events: {
+              change: v => {
+                if (v === '0') {
+                  this.FORM_CONFIG.dym.options = []
+                } else {
+                  this.FORM_CONFIG.dym.options = [
+                    { label: 'football', el: ELEMENTS.Checkbox },
+                    { label: 'swimming', el: ELEMENTS.Checkbox }
+                  ]
+                }
+              }
             }
           },
           {
             key: 'hobby',
             label: '爱好',
             el: ELEMENTS.CheckboxGroup,
-            options: [
-              { label: 'football', el: ELEMENTS.Checkbox },
-              { label: 'swimming', el: ELEMENTS.Checkbox }
-            ]
+            options: () => this.FORM_CONFIG.dym.options
           },
           { key: 'avName', label: '片名', el: ELEMENTS.Input },
           {
@@ -142,12 +148,11 @@ export default {
             }
           },
           {
-
             key: 'date',
             label: '时间',
             el: ELEMENTS.TimeSelect,
             placeholder: '选择时间',
-            span:14,
+            span: 14,
             props: {
               'picker-options': {
                 start: '08:30',
@@ -218,12 +223,8 @@ export default {
     },
     async invoke () {
       const data = await this.$dialog.invoke({
-        dialogProps: {
-          top: '20vh',
-          'close-on-click-modal': false
-        },
         width: '50%',
-        title: () => <span style={{color:'red'}}><HelloWorld/></span>,
+        title: 'Dialog Title',
         cancel: () => {},
         open: () => {},
         cancelButtonText: '',
@@ -240,6 +241,9 @@ export default {
               <el-button onClick={this.restore}>Restore</el-button>
               <CommonForm
                 ref='form1'
+                name='form1'
+                class='form'
+                style={{ border: '1px solid red' }}
                 form-data={this.formData}
                 form-config={this.FORM_CONFIG}
                 onChange={this.change}
@@ -248,12 +252,10 @@ export default {
           )
         }
       })
-      console.log('data', data)
       this.$dialog.invoke({
         // dialogProps: {
         //   modal: false,
         // },
-        // name: 'form2',
         title: data,
         editable: false, // 不显示dialog内置的确认取消footer
         render: () => <Form2></Form2>,

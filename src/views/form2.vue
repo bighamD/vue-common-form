@@ -13,12 +13,12 @@
 </template>
 <script>
 export default {
-  data () {
+  data() {
     return {
       formConfig: {
         props: {
           inline: true,
-          labelWidth: '60px'
+          labelWidth: '60px',
         },
         formItems: [
           {
@@ -27,32 +27,32 @@ export default {
             key: 'name',
             label: '姓名',
             events: {
-              change: e => this.nameChange(e),
-              input: e => this.nameInput(e)
-            }
+              change: (e) => this.nameChange(e),
+              input: (e) => this.nameInput(e),
+            },
           },
           {
             el: 'slot',
             key: 'age',
-            label: '年龄'
-          }
-        ]
+            label: '年龄',
+          },
+        ],
       },
       formData: {
-        age: 26
-      }
-    }
+        age: 26,
+      },
+    };
   },
   methods: {
-    nameChange () {
-      console.log('do something when name changed')
+    nameChange() {
+      console.log('do something when name changed');
     },
-    nameInput () {
-      console.log('do something when name input')
+    nameInput() {
+      console.log('do something when name input');
     },
-    cancel () {
-      this.$dialog.close() //关闭这个对话框
-    }
-  }
-}
+    cancel() {
+      this.$dialog.close(); //关闭这个对话框
+    },
+  },
+};
 </script>

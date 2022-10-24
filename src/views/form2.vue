@@ -45,7 +45,7 @@ export default {
   },
   methods: {
     nameChange() {
-      console.log('do something when name changed');
+      console.log('do something when name changed 666');
     },
     nameInput() {
       console.log('do something when name input');

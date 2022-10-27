@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+{
+    v=$(git rev-parse --abbrev-ref HEAD)
+    version=${v##*/}
+    echo "feat($version): 描述" > ~/.git_template
+    git config commit.template ~/.git_template
+}

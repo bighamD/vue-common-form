@@ -5,35 +5,32 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "prepare": "husky install"
   },
   "dependencies": {
+    "@vue/babel-helper-vue-jsx-merge-props": "^1.4.0",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "element-ui": "^2.14.1",
+    "node-version": "^2.0.0",
     "vant": "^2.12.14",
     "vconsole": "^3.4.1",
     "vue": "^2.6.11"
   },
   "devDependencies": {
-    "@commitlint/cli": "^17.1.2",
-    "@vue/cli-plugin-babel": "~4.5.0",
-    "@vue/cli-plugin-eslint": "~4.5.0",
-    "@vue/cli-service": "~4.5.0",
+    "@commitlint/cli": "~9.1.2",
+    "@vue/cli-plugin-babel": "~4.4.0",
+    "@vue/cli-plugin-eslint": "~4.4.0",
+    "@vue/cli-service": "~4.4.0",
     "babel-eslint": "^10.1.0",
     "commitlint-plugin-function-rules": "^1.7.1",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
-    "husky": "^4.3.6",
+    "husky": "^8.0.0",
     "lint-staged": "^10.5.3",
     "prettier": "^2.7.1",
     "vue-template-compiler": "^2.6.11"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "commit-msg": "commitlint -e $HUSKY_GIT_PARAMS"
-    }
   },
   "lint-staged": {
     "src/**/*.{js,vue}": [

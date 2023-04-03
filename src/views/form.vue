@@ -1,6 +1,6 @@
 <template>
   <el-button type="danger" @click="invoke">
-    invoke dialog
+    Invoke Dialog 1
   </el-button>
 </template>
 <script>

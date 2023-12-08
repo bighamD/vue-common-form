@@ -6,7 +6,8 @@
     "serve": "vue-cli-service serve & node server.js",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "docker": "docker build -t prod-sroucemap-debugger ."
   },
   "dependencies": {
     "@vue/babel-helper-vue-jsx-merge-props": "^1.4.0",

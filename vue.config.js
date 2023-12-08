@@ -7,7 +7,7 @@ module.exports = {
     config.output.sourceMapFilename = 'sourcemap/[file].map'
 
     config.plugins.push(
-      new AddPrefixToSourceMapUrlPlugin("http://localhost:1234")
+      new AddPrefixToSourceMapUrlPlugin("https://bigham.sourcemap.com/")
     );
   },
   devServer: {

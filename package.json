@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve & node server.js",
-    "build": "vue-cli-service build & node server.js",
+    "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "prepare": "husky install"
   },

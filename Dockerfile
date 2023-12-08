@@ -1,23 +1,16 @@
 # 使用 Node 18 镜像作为构建环境
-FROM node:18 as builder
+FROM node:16 as builder
 
 # 设置工作目录
 WORKDIR /app
 
-# 复制 package.json 和 package-lock.json 到工作目录
-COPY package*.json ./
+COPY . .
 
 # 安装依赖
 RUN npm install
 
-# 复制源代码到工作目录
-COPY . .
-
 # 执行构建命令
 RUN npm run build
-
-# 使用 Node 18 镜像作为运行环境
-FROM node:18
 
 # 使用官方的 Nginx 镜像
 FROM nginx:latest

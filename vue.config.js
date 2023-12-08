@@ -1,10 +1,14 @@
+const AddPrefixToSourceMapUrlPlugin = require('./plugins/AddPrefixToSourceMapUrlPlugin');
 module.exports = {
   //   mode:
   lintOnSave: false,
+  publicPath: '.',
   configureWebpack: (config) => {
-    if (process.env.NODE_ENV !== "production") {
-      config.devtool = "cheap-source-map";
-    }
+    config.output.sourceMapFilename = 'sourcemap/[file].map'
+
+    config.plugins.push(
+      new AddPrefixToSourceMapUrlPlugin("http://localhost:1234")
+    );
   },
   devServer: {
     compress: true, // 开启gzip压缩

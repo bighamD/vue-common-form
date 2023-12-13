@@ -6,9 +6,9 @@ module.exports = {
   configureWebpack: (config) => {
     config.output.sourceMapFilename = 'sourcemap/[file].map'
 
-    // config.plugins.push(
-    //   new AddPrefixToSourceMapUrlPlugin('')
-    // );
+    config.plugins.push(
+      new AddPrefixToSourceMapUrlPlugin('https://bigham.com')
+    );
   },
   devServer: {
     compress: true, // 开启gzip压缩

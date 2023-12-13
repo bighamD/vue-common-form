@@ -15,6 +15,9 @@ RUN npm run build
 # 使用官方的 Nginx 镜像
 FROM nginx:latest
 
+# 清空 Nginx 默认的静态文件目录
+RUN rm -rf /usr/share/nginx/html/*
+
 # 从构建环境中拷贝打包后的静态文件到 Nginx 默认的静态文件目录
 COPY --from=builder /app/dist /usr/share/nginx/html
 
